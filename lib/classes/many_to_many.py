@@ -84,6 +84,21 @@ class Customer:
         # Order.all.append(new_order)
         return new_order
     
+    def most_aficionado(coffee):
+        # return the customer object who has spent the most money on the coffee object
+        most_aficionado = None
+        most_spent = 0
+        # iterate through customers
+        for cus in Customer.all:
+            # how much did this customer spend?
+            spent = sum([order.price for order in cus.orders() if order.coffee == coffee])
+            # is this more than previous customers spent?
+            if spent > most_spent:
+                most_spent = spent
+                most_aficionado = cus
+
+        return most_aficionado
+    
 class Order:
     all = []
     def __init__(self, customer, coffee, price):
